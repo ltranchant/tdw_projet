@@ -1,0 +1,10 @@
+{% extends 'squelette/base_complete.html.twig' %}
+{% block vue %}
+    <h1>Ajout d'un produit</h1>
+    {{ form_start(form) }}
+        <p>  {{ form_row(form.libelle, { 'label' : 'Libelle : ' }) }}</p>
+        <p> {{ form_row(form.prixUnitaire, { 'label' : 'Prix unitaire: ' }) }}</p>
+        <p> {{ form_row(form.quantite, { 'label' : 'Quantite : ' }) }}</p>
+        <p>{{ form_widget(form.submit, { 'label' : 'Ajouter' }) }}</p>
+    {{ form_end(form) }}
+{% endblock %}

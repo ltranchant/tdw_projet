@@ -1,0 +1,23 @@
+{% extends 'squelette/base_complete.html.twig' %}
+{% block vue %}
+    <h1>Liste des produits de notre magasin</h1>
+    {{ form_start(form) }}
+    <table>
+        <tr>
+            <th>Libellé</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Choix</th>
+        </tr>
+        {% for p in produits %}
+        <tr>
+            <td>{{ p.libelle }}</td>
+            <td>{{ p.prixUnitaire }} </td>
+            <td>{{ p.quantite }}</td>
+            <td>{{ form_widget(attribute(form,'produit_quantite_'~p.id)) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {{ form_end(form) }}
+{% endblock %}

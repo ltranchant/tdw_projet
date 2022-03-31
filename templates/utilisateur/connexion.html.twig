@@ -1,0 +1,13 @@
+{% extends 'squelette/base_complete.html.twig' %}
+{% block css %}
+    <link href="{{ asset('style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <h1>Connexion au site</h1>
+    {{ form_start(form) }}
+        <p>  {{ form_row(form.username, { 'label' : 'Identifiant : ' }) }}</p>
+        <p> {{ form_row(form.password, { 'label' : 'Mot de passe : ' }) }}</p>
+        <p>{{ form_widget(form.submit, { 'label' : 'Se connecter' }) }}</p>
+    {{ form_end(form) }}
+    <h6><a href="/user/add"> Inscription</a></h6>
+{% endblock %}
