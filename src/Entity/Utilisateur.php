@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -51,6 +53,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $dateNaissance;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UtilisateurProduit::class, mappedBy="utilisateur")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,7 +100,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_NOROLE';
 
         return array_unique($roles);
     }
@@ -167,6 +179,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
         $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UtilisateurProduit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(UtilisateurProduit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(UtilisateurProduit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getUtilisateur() === $this) {
+                $produit->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

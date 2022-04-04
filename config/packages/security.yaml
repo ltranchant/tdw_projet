@@ -20,6 +20,13 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticator: App\Security\UtilisateurAuthenticator
+            logout:
+                path: utilisateur_logout
+                # where to redirect after logout
+                target: utilisateur_login
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_CLIENT # un admin a tous les droits d’un client avec d’autres en plus
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -30,8 +37,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/superAdmin, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/utilisateur, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: ROLE_NON_AUTH }
 
 when@test:
     security:

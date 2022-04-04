@@ -6,6 +6,6 @@
 {% block css %}
     <link href="{{ asset('style.css') }}" rel="stylesheet">
 {% endblock %}
-{% block body %}
-    <h1>Bienvenue sur le site ! Vous consultez le site en tant que {{ roles }}</h1>
+{% block vue %}
+    <h3>Bienvenue sur le site ! Vous consultez le site en tant que {{ roles|join(', ') }}</h3>
 {% endblock %}
