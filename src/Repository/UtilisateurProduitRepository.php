@@ -45,22 +45,21 @@ class UtilisateurProduitRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return UtilisateurProduit[] Returns an array of UtilisateurProduit objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return integer Returns the number of article in the basket of a client
+      */
+
+    public function countNbArticlesPanier($value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->select('sum(u.quantite)')
+            ->andWhere('u.utilisateur = :val')
             ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->getSingleScalarResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?UtilisateurProduit

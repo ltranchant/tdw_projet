@@ -1,4 +1,4 @@
-{% extends 'squelette/base_complete.html.twig' %}
+{% extends 'Squelette/base_complete.html.twig' %}
 {% block vue %}
     <h1>Liste des produits de notre magasin</h1>
     {{ form_start(form) }}
@@ -14,7 +14,11 @@
             <td>{{ p.libelle }}</td>
             <td>{{ p.prixUnitaire }} </td>
             <td>{{ p.quantite }}</td>
-            <td>{{ form_widget(attribute(form,'produit_quantite_'~p.id)) }}</td>
+            <td>
+                {% if p.quantite > 0 %}
+                    {{ form_widget(attribute(form,'produit_quantite_'~p.id)) }}
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </table>

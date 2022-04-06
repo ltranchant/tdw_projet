@@ -1,0 +1,27 @@
+{% extends 'Squelette/base_complete.html.twig' %}
+{% block vue %}
+    <h1>Liste des produits de notre magasin</h1>
+    <table>
+        <tr>
+            <th>Libellé</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
+            <th>Prix total</th>
+            <th>Action</th>
+        </tr>
+        {% for up in userProduit %}
+        <tr>
+            <td>{{ up.produit.libelle }}</td>
+            <td>{{ up.produit.prixUnitaire }} </td>
+            <td>{{ up.quantite }}</td>
+            <td>{{ up.quantite * up.produit.prixUnitaire }}</td>
+            <td><input type="button" onclick="window.location.href = '{{ path('panier_supp',{id: up.id}) }}';" value="Supprimer" /></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3"></td>
+            <td><input type="button" onclick="window.location.href = '{{ path('panier_acheter') }}';" value="Acheter" /></td>
+            <td><input type="button" onclick="window.location.href = '{{ path('panier_vider') }}';" value="Vider" /></td>
+        </tr>
+    </table>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="im22_produit")
@@ -25,11 +26,17 @@ class Produit
 
     /**
      * @ORM\Column(type="float", name="prix_unitaire")
+     * @Assert\Positive(
+     *     message="Le prix unitaire ne peut être négatif"
+     * )
      */
     private $prixUnitaire;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\PositiveOrZero(
+     *     message="La quantité ne peut être négative"
+     * )
      */
     private $quantite;
 

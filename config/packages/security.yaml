@@ -41,7 +41,7 @@ security:
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/superAdmin, roles: ROLE_SUPER_ADMIN }
         - { path: ^/utilisateur, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: ROLE_NON_AUTH }
+        - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
     security:

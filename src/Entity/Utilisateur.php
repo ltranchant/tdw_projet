@@ -6,12 +6,14 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @ORM\Table(name="im22_user", uniqueConstraints={@ORM\UniqueConstraint(name="nom_prenom_unique", columns={"nom", "prenom"})})
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -103,6 +105,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $roles[] = 'ROLE_NOROLE';
 
         return array_unique($roles);
+    }
+
+    public function is_granted($role): bool
+    {
+        return in_array($role, $this->getRoles());
     }
 
     public function setRoles(array $roles): self

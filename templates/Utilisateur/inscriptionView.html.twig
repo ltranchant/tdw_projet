@@ -1,0 +1,17 @@
+{% extends 'Squelette/base_complete.html.twig' %}
+
+{% block title %}{{ title }}!{% endblock %}
+
+{% block vue %}
+    <h1>{{ title }}</h1>
+
+    {{ form_start(form) }}
+        <p>{{ form_row(form.username) }}</p>
+        <p>{{ form_row(form.nom) }}</p>
+        <p>{{ form_row(form.prenom) }}</p>
+        <p>{{ form_row(form.dateNaissance) }}</p>
+        <p>{{ form_row(form.plainPassword) }}</p>
+
+        <p>{{ form_row(form.submit) }}</p>
+    {{ form_end(form) }}
+{% endblock %}

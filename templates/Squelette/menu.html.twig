@@ -1,0 +1,10 @@
+{% if nbArticle != null %}
+    <p>Vous avez {{ nbArticle }} articles dans votre panier</p>
+{% endif %}
+{% for label, lien in liens %}
+
+    <p><a href="{{ path(lien) }}">{{ label }}</a> </p>
+{% endfor %}
+{% if is_granted('ROLE_ADMIN') %}
+    <p><a href="https://fr.wikipedia.org/wiki/The_Truman_Show">The Truman Show</a></p>
+{% endif %}

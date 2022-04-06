@@ -16,7 +16,9 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('libelle',TextType::class)
-            ->add('prixUnitaire',NumberType::class)
+            ->add('prixUnitaire',NumberType::class,[
+                'invalid_message' => 'Veuillez saisir un nombre prositif'
+            ])
             ->add('quantite',IntegerType::class)
         ;
     }

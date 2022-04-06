@@ -1,0 +1,11 @@
+{% extends 'Squelette/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style_base_complete.css') }}">
+{% endblock %}
+{% block body %}
+    {% include 'Squelette/entete.html.twig' %}
+    {{  render(controller('App\\Controller\\UtilisateurController::menuAction')) }}
+    {% block vue %}{% endblock %}
+    {% include 'Squelette/pied.html.twig' %}
+{% endblock %}

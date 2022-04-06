@@ -1,8 +1,8 @@
-{% extends 'squelette/base.html.twig' %}
+{% extends 'Squelette/base_complete.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion !{% endblock %}
 
-{% block body %}
+{% block vue %}
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

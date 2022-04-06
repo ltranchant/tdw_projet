@@ -15,10 +15,12 @@ class ListProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         foreach ($options['produits'] as  $p){
-            $builder->add('produit_quantite_'.$p->getId(),ChoiceType::class, [
-                'choices' => range(0,$p->getQuantite(),1),
-                'empty_data' => 0,
-            ]);
+            if($p->getQuantite() > 0) {
+                $builder->add('produit_quantite_' . $p->getId(), ChoiceType::class, [
+                    'choices' => range(0, $p->getQuantite(), 1),
+                    'empty_data' => 0,
+                ]);
+            }
         }
 //        $builder->add('produits',CollectionType::class,[
 //            'entry_type' => ProduitType::class,
