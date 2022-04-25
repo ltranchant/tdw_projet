@@ -7,6 +7,7 @@
     <link href="{{ asset('style.css') }}" rel="stylesheet">
 {% endblock %}
 {% block vue %}
+    <p>{{ reversed }}</p>
     <h3>Bienvenue sur le site ! Vous consultez le site en tant
         {% if is_granted('ROLE_ADMIN') %}
             qu'administrateur

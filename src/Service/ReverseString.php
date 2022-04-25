@@ -6,7 +6,7 @@ class ReverseString
 {
     public function reverse(string $source): string
     {
-        return $source;
+        return strrev($source);
     }
 
 }

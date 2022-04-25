@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Utilisateur;
 use App\Entity\UtilisateurProduit;
 use App\Form\UtilisateurType;
+use App\Service\ReverseString;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -26,9 +27,13 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/accueil", name="_accueil")
      */
-    public function accueilAction(): Response
+    public function accueilAction(ReverseString $reverseString): Response
     {
-        return $this->render('Utilisateur/accueilView.html.twig');
+        $reversed = $reverseString->reverse("Bonjour bienvenue sur la page d'accueil du site");
+        dump($reversed);
+        return $this->render('Utilisateur/accueilView.html.twig',[
+            'reversed' => $reversed,
+        ]);
     }
 
     /**
@@ -165,12 +170,12 @@ class UtilisateurController extends AbstractController
         $em = $doctrine->getManager();
 
         $user = new Utilisateur();
-        $user->setUsername('supamdin')
-            ->setNom('supadmin')
-            ->setPrenom('supadmin')
-            ->setRoles(['ROLE_SUPER_ADMIN'])
+        $user->setUsername('simon')
+            ->setNom('Simon')
+            ->setPrenom('Simon')
+            ->setRoles(['ROLE_CLIENT'])
             ->setDateNaissance(\DateTime::createFromFormat('d/m/Y h:s', date('d/m/Y h:s')));
-        $hashedPassword = $passwordHasher->hashPassword($user,'aaa');
+        $hashedPassword = $passwordHasher->hashPassword($user,'nomis');
         $user->setPassword($hashedPassword);
         $em->persist($user);
         $em->flush();

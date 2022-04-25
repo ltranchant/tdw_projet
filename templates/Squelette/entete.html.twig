@@ -1,1 +1,7 @@
-<p>entete</p>
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+    <img src="{{ asset('image/administrateur.png') }}" alt="image entête : admin" height="200">
+{% elseif is_granted('ROLE_CLIENT') %}
+    <img src="{{ asset('image/client.png') }}" alt="image entête : admin" height="200">
+{% else  %}
+    <img src="{{ asset('image/non_authentifie.webp') }}" alt="image entête : admin" height="200">
+{% endif %}
